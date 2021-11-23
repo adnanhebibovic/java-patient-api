@@ -14,6 +14,7 @@ public class PatientController {
 	@Autowired
     private RestTemplate restTemplate;
 
+    //Testing
 	@GetMapping("/patient")
 	public Patient getHfirPatient(@RequestParam(value = "url", defaultValue = "https://hapi.fhir.org/baseR4/Patient/1854776") String url) {
         Patient patient = restTemplate.getForObject(url, Patient.class);
