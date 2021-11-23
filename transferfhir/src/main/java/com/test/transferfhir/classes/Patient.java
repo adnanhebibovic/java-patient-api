@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Patient {
-    
+
     private List<Name> name = null;
     private String gender;
     private String birthDate;
