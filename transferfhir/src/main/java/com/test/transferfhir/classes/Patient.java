@@ -34,6 +34,32 @@ public class Patient {
         this.birthDate = birthDate;
     }
 
+    private Name getFirstOccureanceOfName() {
+        List<Name> names = this.getName();
+
+        Name name = names != null && !names.isEmpty() ? names.get(0) : null;
+
+        return name;
+    }
+
+    public String getLastName() {
+        Name name = getFirstOccureanceOfName();
+        
+        String lastName = name != null ? name.getFamily() : null;
+
+        return lastName;
+    }
+
+    public String getFirstName() {
+        Name name = getFirstOccureanceOfName();
+
+        String firstName = name != null && !name.getGiven().isEmpty() ?
+            String.join(" ", name.getGiven()) :
+            null;
+
+        return firstName;
+    }
+
     @Override
     public String toString() {
         String result = "Patient {";

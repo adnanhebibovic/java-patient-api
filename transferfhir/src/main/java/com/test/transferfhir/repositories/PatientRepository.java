@@ -2,12 +2,12 @@ package com.test.transferfhir.repositories;
 
 import java.util.List;
 
-import com.test.transferfhir.entites.Patient;
+import com.test.transferfhir.entites.PatientEntity;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface PatientRepository extends CrudRepository<Patient, Long> {
-    List<Patient> findByLastName(String lastName);
+public interface PatientRepository extends CrudRepository<PatientEntity, Long> {
+    List<PatientEntity> findByUrl(String url);
 
-    Patient findById(long id);
+    PatientEntity findById(long id);
 }
