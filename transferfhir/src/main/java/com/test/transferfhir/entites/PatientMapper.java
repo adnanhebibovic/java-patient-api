@@ -48,6 +48,9 @@ public class PatientMapper {
                     //cannot execute complex custom logic directly within PropertyMap.configure()
                     map().setLastName(source.getLastName());
                     map().setFirstName(source.getFirstName());
+                    map().setPrefix(source.getPrefix());
+                    map().setSuffix(source.getSuffix());
+                    
                 }
         };
           

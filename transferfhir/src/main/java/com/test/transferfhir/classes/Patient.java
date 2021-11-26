@@ -34,7 +34,7 @@ public class Patient {
         this.birthDate = birthDate;
     }
 
-    private Name getFirstOccureanceOfName() {
+    private Name getFirstOccurrenceOfName() {
         List<Name> names = this.getName();
 
         Name name = names != null && !names.isEmpty() ? names.get(0) : null;
@@ -43,7 +43,7 @@ public class Patient {
     }
 
     public String getLastName() {
-        Name name = getFirstOccureanceOfName();
+        Name name = getFirstOccurrenceOfName();
         
         String lastName = name != null ? name.getFamily() : null;
 
@@ -51,13 +51,33 @@ public class Patient {
     }
 
     public String getFirstName() {
-        Name name = getFirstOccureanceOfName();
+        Name name = getFirstOccurrenceOfName();
 
-        String firstName = name != null && !name.getGiven().isEmpty() ?
+        String firstName = name != null && name.getGiven() != null && !name.getGiven().isEmpty() ?
             String.join(" ", name.getGiven()) :
             null;
 
         return firstName;
+    }
+
+    public String getPrefix() {
+        Name name = getFirstOccurrenceOfName();
+
+        String prefix = name != null && name.getPrefix() != null && !name.getPrefix().isEmpty() ?
+            String.join(" ", name.getPrefix()) :
+            null;
+
+        return prefix;
+    }
+
+    public String getSuffix() {
+        Name name = getFirstOccurrenceOfName();
+
+        String suffix = name != null && name.getSuffix() != null && !name.getSuffix().isEmpty() ?
+        String.join(" ", name.getSuffix()) :
+        null;
+
+        return suffix;
     }
 
     @Override

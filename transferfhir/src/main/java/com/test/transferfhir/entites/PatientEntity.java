@@ -14,6 +14,8 @@ public class PatientEntity {
     private Long id;
 
     private String url;
+    private String prefix;
+    private String suffix;
     private String firstName;
     private String lastName;
     private String gender;
@@ -63,9 +65,32 @@ public class PatientEntity {
         this.birthDate = birthDate;
     }
 
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
+
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
     @Override
     public String toString() {
         var result = "Patient {";
+
+        result += prefix != null ? " prefix='" + prefix + "'" : "";
+        result += firstName != null ? " firstName='" + firstName + "'" : "";
+        result += lastName != null ? " lastName='" + lastName + "'" : "";
+        result += suffix != null ? " suffix='" + suffix + "'" : "";
+        result += gender != null ? " gender='" + gender + "'" : "";
+        result += birthDate != null ? " birthDate='" + birthDate.toString() + "'" : "";
 
         result += "}";
 
