@@ -39,14 +39,12 @@ public class PatientController {
 
         patient.setUrl(url);
 
-        synchronized (this) {
-            List<PatientEntity> patients = getPatientsByUrl(url);
+        List<PatientEntity> patients = getPatientsByUrl(url);
 
-            if (!patients.isEmpty())
-                return new ResponseEntity<>(patients.get(0), HttpStatus.FOUND);
+        if (!patients.isEmpty())
+            return new ResponseEntity<>(patients.get(0), HttpStatus.FOUND);
 
-            return new ResponseEntity<>(patientRepository.save(patient), HttpStatus.CREATED);
-        }
+        return new ResponseEntity<>(patientRepository.save(patient), HttpStatus.CREATED);
     }
 
     @GetMapping("/getHfirPatient")
