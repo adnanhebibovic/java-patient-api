@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class PatientController {
 
-	@Autowired
+    @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
@@ -28,24 +28,36 @@ public class PatientController {
     @Autowired
     private PatientMapper patientMapper;
 
-	@PostMapping("/transferHfirPatient")
-	public ResponseEntity<PatientEntity> transferHfirPatient(@RequestParam(value = "url", defaultValue = "https://hapi.fhir.org/baseR4/Patient/1854776") String url) {
-        
+    private List<PatientEntity> getPatientsByUrl(String url) {
+        return patientRepository.findByUrl(url);
+    }
+
+    @PostMapping("/transferHfirPatient")
+    public ResponseEntity<PatientEntity> transferHfirPatient(
+            @RequestParam(value = "url", defaultValue = "https://hapi.fhir.org/baseR4/Patient/1854776") String url) {
         PatientEntity patient = patientMapper.map(restTemplate.getForObject(url, Patient.class));
 
         patient.setUrl(url);
 
-        return new ResponseEntity<>(patientRepository.save(patient), HttpStatus.CREATED);       
-	}
+        synchronized (this) {
+            List<PatientEntity> patients = getPatientsByUrl(url);
+
+            if (!patients.isEmpty())
+                return new ResponseEntity<>(patients.get(0), HttpStatus.FOUND);
+
+            return new ResponseEntity<>(patientRepository.save(patient), HttpStatus.CREATED);
+        }
+    }
 
     @GetMapping("/getHfirPatient")
-    public ResponseEntity<PatientEntity> getHfirPatient(@RequestParam(value = "url", defaultValue = "https://hapi.fhir.org/baseR4/Patient/1854776") String url) {
+    public ResponseEntity<PatientEntity> getHfirPatient(
+            @RequestParam(value = "url", defaultValue = "https://hapi.fhir.org/baseR4/Patient/1854776") String url) {
 
-        List<PatientEntity> patient = patientRepository.findByUrl(url);
+        List<PatientEntity> patients = getPatientsByUrl(url);
 
-        if (patient.isEmpty())
+        if (patients.isEmpty())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(patient.get(0), HttpStatus.OK);
+        return new ResponseEntity<>(patients.get(0), HttpStatus.OK);
     }
 }
