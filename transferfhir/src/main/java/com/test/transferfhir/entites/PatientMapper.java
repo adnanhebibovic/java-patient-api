@@ -31,8 +31,7 @@ public class PatientMapper {
             @Override
             protected LocalDate convert(String source) {
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate localDate = LocalDate.parse(source, format);
-                return localDate;
+                return LocalDate.parse(source, format);
             }
         };
 
