@@ -1,14 +1,13 @@
-FROM openjdk:12-alpine as build
-WORKDIR /workspace/app
+# syntax=docker/dockerfile:1
 
-RUN apk add --no-cache maven
+FROM openjdk:16-alpine3.13
 
-COPY pom.xml .
-COPY src src
+WORKDIR /app
 
-RUN mvn clean install -DskipTests
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
 
-FROM openjdk:12-alpine
-ARG JAR_FILE=/workspace/app/target/*.jar
-COPY --from=build ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+COPY src ./src
+
+CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql"]

@@ -1,5 +1,3 @@
 # java-patient-api
 
-docker build -t ahebibovic/hfirpatient . 
-
-docker run -p 8080:8080 ahebibovic/hfirpatient
+docker-compose -f docker-compose.dev.yml up --build
