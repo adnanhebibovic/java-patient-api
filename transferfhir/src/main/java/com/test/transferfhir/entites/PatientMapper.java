@@ -30,6 +30,8 @@ public class PatientMapper {
         Converter<String, LocalDate> toStringDate = new AbstractConverter<String, LocalDate>() {
             @Override
             protected LocalDate convert(String source) {
+                if (source == null) return null;
+
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 return LocalDate.parse(source, format);
             }

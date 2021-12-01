@@ -4,17 +4,13 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class PatientEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class PatientEntity extends BaseEntity {
 
     @Column(unique=true)
+    @NotEmpty
     private String url;
     
     private String prefix;
@@ -23,10 +19,6 @@ public class PatientEntity {
     private String lastName;
     private String gender;
     private LocalDate birthDate;
-
-    public Long getId() {
-        return id;
-    }
 
     public String getFirstName() {
         return firstName;
