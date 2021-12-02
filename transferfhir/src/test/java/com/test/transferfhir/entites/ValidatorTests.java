@@ -31,7 +31,7 @@ public class ValidatorTests {
 
 		assertThat(constraintViolations).hasSize(1);
 		ConstraintViolation<PatientEntity> violation = constraintViolations.iterator().next();
-		assertThat(violation.getPropertyPath().toString()).isEqualTo("url");
-		assertThat(violation.getMessage()).isEqualTo("must not be empty");
+		assertThat(violation.getPropertyPath().toString()).hasToString("url");
+		assertThat(violation.getMessage()).hasToString("must not be empty");
 	}
 }
