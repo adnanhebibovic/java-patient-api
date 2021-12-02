@@ -1,7 +1,6 @@
 package com.test.transferfhir.entites;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 import javax.validation.ConstraintViolation;
@@ -14,11 +13,10 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
 public class ValidatorTests {
 
     @Test
-	void shouldNotValidateWhenUrlIsEmpty() {
+	public void shouldNotValidateWhenUrlIsEmpty() {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
