@@ -37,47 +37,37 @@ public class Patient {
     private Name getFirstOccurrenceOfName() {
         List<Name> names = this.getName();
 
-        Name name = names != null && !names.isEmpty() ? names.get(0) : null;
-
-        return name;
+        return names != null && !names.isEmpty() ? names.get(0) : null;
     }
 
     public String getLastName() {
-        Name name = getFirstOccurrenceOfName();
+        Name fullName = getFirstOccurrenceOfName();
         
-        String lastName = name != null ? name.getFamily() : null;
-
-        return lastName;
+        return fullName != null ? fullName.getFamily() : null;
     }
 
     public String getFirstName() {
-        Name name = getFirstOccurrenceOfName();
+        Name fullName = getFirstOccurrenceOfName();
 
-        String firstName = name != null && name.getGiven() != null && !name.getGiven().isEmpty() ?
-            String.join(" ", name.getGiven()) :
+        return fullName != null && fullName.getGiven() != null && !fullName.getGiven().isEmpty() ?
+            String.join(" ", fullName.getGiven()) :
             null;
-
-        return firstName;
     }
 
     public String getPrefix() {
-        Name name = getFirstOccurrenceOfName();
+        Name fullName = getFirstOccurrenceOfName();
 
-        String prefix = name != null && name.getPrefix() != null && !name.getPrefix().isEmpty() ?
-            String.join(" ", name.getPrefix()) :
+        return fullName != null && fullName.getPrefix() != null && !fullName.getPrefix().isEmpty() ?
+            String.join(" ", fullName.getPrefix()) :
             null;
-
-        return prefix;
     }
 
     public String getSuffix() {
-        Name name = getFirstOccurrenceOfName();
+        Name fullName = getFirstOccurrenceOfName();
 
-        String suffix = name != null && name.getSuffix() != null && !name.getSuffix().isEmpty() ?
-        String.join(" ", name.getSuffix()) :
+        return fullName != null && fullName.getSuffix() != null && !fullName.getSuffix().isEmpty() ?
+        String.join(" ", fullName.getSuffix()) :
         null;
-
-        return suffix;
     }
 
     @Override
@@ -87,10 +77,10 @@ public class Patient {
         if (name != null && !name.isEmpty())
             result += "name='" + name.toString() + "'";
 
-        if (gender != null && gender != "")
+        if (gender != null && !"".equals(gender))
             result += ", gender='" + gender + "'";
 
-        if (birthDate != null && birthDate != "")
+        if (birthDate != null && !"".equals(birthDate))
             result += ", birthDate= '" + birthDate + "'";
         
         result += "}";

@@ -47,7 +47,7 @@ public class Name {
     public String toString() {
         String result = "Name {";
 
-        if (family != null && family != "")
+        if (family != null && !"".equals(family))
             result +=  "family='" + family + "'";
             
         if (given != null && !given.isEmpty())
