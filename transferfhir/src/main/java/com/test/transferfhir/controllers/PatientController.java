@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class PatientController {
@@ -37,6 +38,9 @@ public class PatientController {
             return new ResponseEntity<>(patients.get(0), HttpStatus.FOUND);
 
         PatientEntity patient = patientService.getPatientEntity(url);
+
+        if (patient == null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Url " + url + " did not worked well! Please try again!");
 
         return new ResponseEntity<>(patientRepository.save(patient), HttpStatus.CREATED);
     }

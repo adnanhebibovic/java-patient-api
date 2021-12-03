@@ -22,7 +22,7 @@ public class PatientService {
         ResponseEntity<Patient> responseEntity = restTemplate.getForEntity(url, Patient.class);
 
         if (responseEntity.getStatusCode() != HttpStatus.OK)
-            throw new RuntimeException("Url " + url + " did not worked well! Please try again!");
+            return null;
 
         PatientEntity patientEntity = patientMapper.map(responseEntity.getBody());
 
