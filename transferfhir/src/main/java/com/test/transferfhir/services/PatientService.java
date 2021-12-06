@@ -2,7 +2,6 @@ package com.test.transferfhir.services;
 
 import com.test.transferfhir.classes.Patient;
 import com.test.transferfhir.entites.PatientEntity;
-import com.test.transferfhir.entites.PatientMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

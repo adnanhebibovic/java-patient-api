@@ -1,4 +1,4 @@
-package com.test.transferfhir.entites;
+package com.test.transferfhir.services;
 
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.AbstractProvider;
@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.test.transferfhir.classes.Patient;
+import com.test.transferfhir.entites.PatientEntity;
 
 @Service
 public class PatientMapper {

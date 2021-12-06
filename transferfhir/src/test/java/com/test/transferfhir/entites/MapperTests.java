@@ -3,6 +3,7 @@ package com.test.transferfhir.entites;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.test.transferfhir.classes.Patient;
+import com.test.transferfhir.services.PatientMapper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
