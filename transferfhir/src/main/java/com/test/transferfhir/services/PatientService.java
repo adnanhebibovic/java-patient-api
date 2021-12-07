@@ -1,24 +1,47 @@
 package com.test.transferfhir.services;
 
+import java.util.List;
+
 import com.test.transferfhir.classes.Patient;
+import com.test.transferfhir.entites.PatientEntity;
+import com.test.transferfhir.repositories.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class PatientService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public Patient getPatient(String url) {
-        ResponseEntity<Patient> responseEntity = restTemplate.getForEntity(url, Patient.class);
+    @Autowired
+    public PatientRepository patientRepository;
 
-        if (responseEntity.getStatusCode() != HttpStatus.OK)
-            return null;
+    @Autowired
+    public PatientMapper patientMapper;
 
-        return responseEntity.getBody();
+    public ResponseEntity<Patient> getResponseEntity(String url) {
+        return restTemplate.getForEntity(url, Patient.class);
+    }
+
+    public PatientEntity createPatient(String url) throws ResponseStatusException {
+        ResponseEntity<Patient> response = getResponseEntity(url);
+
+        if (response.getStatusCode() != HttpStatus.OK)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Url " + url + "did not work very well. Try again!");
+
+        PatientEntity patientEntity = patientMapper.map(response.getBody());
+    
+        patientEntity.setUrl(url);
+
+        return patientRepository.save(patientEntity);
+    }
+
+    public List<PatientEntity> getPatients(String url) {
+        return patientRepository.findByUrl(url);
     }
 }

@@ -37,8 +37,8 @@ public class ServiceTests {
         .when(restTemplate.getForEntity("https://en.wikipedia.org/wiki/Pablo_Picasso", Patient.class))
         .thenReturn(new ResponseEntity<>(givenPatient, HttpStatus.OK));
 
-        Patient actualPatient = patientService.getPatient("https://en.wikipedia.org/wiki/Pablo_Picasso");
+        ResponseEntity<Patient> response = patientService.getResponseEntity("https://en.wikipedia.org/wiki/Pablo_Picasso");
 
-        assertEquals(givenPatient.getLastName(), actualPatient.getLastName());
+        assertEquals(givenPatient.getLastName(), response.getBody().getLastName());
     }
 }
