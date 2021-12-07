@@ -1,9 +1,9 @@
-package com.test.transferfhir.entites;
+package com.test.transferfhir.services;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.test.transferfhir.classes.Patient;
-import com.test.transferfhir.services.PatientMapper;
+import com.test.transferfhir.entites.PatientEntity;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

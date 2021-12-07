@@ -2,8 +2,10 @@ package com.test.transferfhir.controllers;
 
 import java.util.List;
 
+import com.test.transferfhir.classes.Patient;
 import com.test.transferfhir.entites.PatientEntity;
 import com.test.transferfhir.repositories.PatientRepository;
+import com.test.transferfhir.services.PatientMapper;
 import com.test.transferfhir.services.PatientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    private PatientMapper patientMapper;
+
     private List<PatientEntity> getPatientsByUrl(String url) {
         return patientRepository.findByUrl(url);
     }
@@ -37,12 +42,16 @@ public class PatientController {
         if (!patients.isEmpty())
             return new ResponseEntity<>(patients.get(0), HttpStatus.FOUND);
 
-        PatientEntity patient = patientService.getPatientEntity(url);
+        Patient patient = patientService.getPatient(url);
 
         if (patient == null)
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Url " + url + " did not worked well! Please try again!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Url " + url + " did not work well! Please try again!");
 
-        return new ResponseEntity<>(patientRepository.save(patient), HttpStatus.CREATED);
+        PatientEntity patientEntity = patientMapper.map(patient);
+
+        patientEntity.setUrl(url);
+
+        return new ResponseEntity<>(patientRepository.save(patientEntity), HttpStatus.CREATED);
     }
 
     @GetMapping("/getHfirPatient")
