@@ -27,15 +27,15 @@ public class ServiceTests {
     @Test
     public void givenMockito_whenGetIsCalled_thenReturnMockObject()
     {
-        Name[] name = { new Name() };
-        name[0].setFamily("Picasso");
+        Name name = new Name();
+        name.setFamily("Picasso");
 
         Patient givenPatient = new Patient();
-        givenPatient.setName(Arrays.asList(name));
+        givenPatient.setName(Arrays.asList(new Name[] { name }));
 
         Mockito
-        .when(restTemplate.getForEntity("https://en.wikipedia.org/wiki/Pablo_Picasso", Patient.class))
-        .thenReturn(new ResponseEntity<>(givenPatient, HttpStatus.OK));
+            .when(restTemplate.getForEntity("https://en.wikipedia.org/wiki/Pablo_Picasso", Patient.class))
+            .thenReturn(new ResponseEntity<>(givenPatient, HttpStatus.OK));
 
         ResponseEntity<Patient> response = patientService.getResponseEntity("https://en.wikipedia.org/wiki/Pablo_Picasso");
 
