@@ -21,7 +21,7 @@ public class RepositoryTests {
     
     @Test
     @Transactional
-    public void shouldFoundPatientsByUrl() {
+    void shouldFoundPatientsByUrl() {
         PatientEntity bilboBaggins = new PatientEntity();
         bilboBaggins.setFirstName("Bilbo");
         bilboBaggins.setLastName("Baggins");
@@ -45,7 +45,7 @@ public class RepositoryTests {
 
     @Test
     @Transactional
-    public void shouldNotSavePatientsWithDuplicateUrl() {
+    void shouldNotSavePatientsWithDuplicateUrl() {
         PatientEntity theGray = new PatientEntity();
         theGray.setFirstName("Gandalf");
         theGray.setLastName("the Grey");

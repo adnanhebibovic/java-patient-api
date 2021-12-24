@@ -16,7 +16,7 @@ public class MapperTests {
     private PatientMapper patientMapper;
     
     @Test
-    public void shouldMapEmptyPatient() {
+    void shouldMapEmptyPatient() {
         PatientEntity patient = patientMapper.map(new Patient());
 
         assertNotNull(patient);

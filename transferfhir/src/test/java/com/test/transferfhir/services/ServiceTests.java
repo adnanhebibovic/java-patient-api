@@ -25,7 +25,7 @@ public class ServiceTests {
     private PatientService patientService;
 
     @Test
-    public void givenMockito_whenGetIsCalled_thenReturnMockObject()
+    void givenMockito_whenGetIsCalled_thenReturnMockObject()
     {
         Name name = new Name();
         name.setFamily("Picasso");

@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ValidatorTests {
 
     @Test
-	public void shouldNotValidateWhenUrlIsEmpty() {
+	void shouldNotValidateWhenUrlIsEmpty() {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
