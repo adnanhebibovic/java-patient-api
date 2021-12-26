@@ -30,8 +30,9 @@ public class ControllorTests {
 	private PatientService service;
 
 	@Test
-	void greetingShouldReturnMessageFromService() throws Exception {
-		when(service.getPatients("https://en.wikipedia.org/wiki/Alan_Ford_(comics)")).thenReturn(Arrays.asList(new PatientEntity()));
+	void controllorShouldReturnEntityFromService() throws Exception {
+		when(service.getPatients("https://en.wikipedia.org/wiki/Alan_Ford_(comics)"))
+			.thenReturn(Arrays.asList(new PatientEntity()));
 		
         String payload = new ObjectMapper().writeValueAsString(new PatientEntity());
 
