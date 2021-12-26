@@ -14,7 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
-public class RepositoryTests {
+class RepositoryTests {
 
     @Autowired
     PatientRepository patientRepository;

@@ -13,7 +13,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ValidatorTests {
+class ValidatorTests {
 
     @Test
 	void shouldNotValidateWhenUrlIsEmpty() {

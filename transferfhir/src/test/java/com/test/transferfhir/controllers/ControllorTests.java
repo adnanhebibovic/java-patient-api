@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ControllorTests {
+class ControllorTests {
     @Autowired
 	private MockMvc mockMvc;
 
@@ -32,7 +32,7 @@ public class ControllorTests {
 	@Test
 	void controllorShouldReturnEntityFromService() throws Exception {
 		
-		var alanFord = new PatientEntity();
+		PatientEntity alanFord = new PatientEntity();
 		alanFord.setFirstName("Alan");
 		alanFord.setLastName("Ford");
 

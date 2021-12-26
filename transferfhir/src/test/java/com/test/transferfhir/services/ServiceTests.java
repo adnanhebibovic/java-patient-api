@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootTest
-public class ServiceTests {
+class ServiceTests {
     @Mock
     private RestTemplate restTemplate;
 
