@@ -31,10 +31,15 @@ public class ControllorTests {
 
 	@Test
 	void controllorShouldReturnEntityFromService() throws Exception {
-		when(service.getPatients("https://en.wikipedia.org/wiki/Alan_Ford_(comics)"))
-			.thenReturn(Arrays.asList(new PatientEntity()));
 		
-        String payload = new ObjectMapper().writeValueAsString(new PatientEntity());
+		var alanFord = new PatientEntity();
+		alanFord.setFirstName("Alan");
+		alanFord.setLastName("Ford");
+
+		when(service.getPatients("https://en.wikipedia.org/wiki/Alan_Ford_(comics)"))
+			.thenReturn(Arrays.asList(alanFord));
+		
+        String payload = new ObjectMapper().writeValueAsString(alanFord);
 
         this.mockMvc.perform(get("/getHfirPatient?url=https://en.wikipedia.org/wiki/Alan_Ford_(comics)"))
             .andDo(print())
