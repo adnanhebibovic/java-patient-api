@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file .././transferfhir/Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/transferfhir
+      run: docker build . --file ./transferfhir/Dockerfile --tag ahebibovic/transferfhir
