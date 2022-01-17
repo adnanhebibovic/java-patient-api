@@ -28,7 +28,7 @@ public class PatientController {
         if (!patients.isEmpty())
             return new ResponseEntity<>(patients.get(0), HttpStatus.FOUND);
 
-        return new ResponseEntity<>(patientService.createPatient(url), HttpStatus.CREATED);
+        return new ResponseEntity<>(patientService.savePatient(url), HttpStatus.OK);
     }
 
     @GetMapping("/getHfirPatient")

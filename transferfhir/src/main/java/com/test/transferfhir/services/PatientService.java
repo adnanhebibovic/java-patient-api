@@ -24,11 +24,11 @@ public class PatientService {
     @Autowired
     public PatientMapper patientMapper;
 
-    public ResponseEntity<Patient> getResponseEntity(String url) {
+    private ResponseEntity<Patient> getResponseEntity(String url) {
         return restTemplate.getForEntity(url, Patient.class);
     }
 
-    public PatientEntity createPatient(String url) throws ResponseStatusException {
+    public PatientEntity savePatient(String url) throws ResponseStatusException {
         ResponseEntity<Patient> response = getResponseEntity(url);
 
         if (response.getStatusCode() != HttpStatus.OK)
