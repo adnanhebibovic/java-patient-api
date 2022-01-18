@@ -4,14 +4,13 @@ import java.util.List;
 
 import com.test.transferfhir.classes.Patient;
 import com.test.transferfhir.entites.PatientEntity;
+import com.test.transferfhir.handlers.RestTemplateErrorHandler;
 import com.test.transferfhir.repositories.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class PatientService {
@@ -25,14 +24,12 @@ public class PatientService {
     public PatientMapper patientMapper;
 
     private ResponseEntity<Patient> getResponseEntity(String url) {
+        restTemplate.setErrorHandler(new RestTemplateErrorHandler());
         return restTemplate.getForEntity(url, Patient.class);
     }
 
-    public PatientEntity savePatient(String url) throws ResponseStatusException {
+    public PatientEntity savePatient(String url) {
         ResponseEntity<Patient> response = getResponseEntity(url);
-
-        if (response.getStatusCode() != HttpStatus.OK)
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Url " + url + "did not work very well. Try again!");
 
         PatientEntity patientEntity = patientMapper.map(response.getBody());
     

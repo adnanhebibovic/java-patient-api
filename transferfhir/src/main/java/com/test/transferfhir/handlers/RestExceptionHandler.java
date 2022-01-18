@@ -3,6 +3,7 @@ package com.test.transferfhir.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
@@ -20,7 +21,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
+public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
@@ -72,6 +73,11 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
             error += requiredType.getName();
 
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler(value = ApiError.class)
+    ResponseEntity<ApiError> handleMyRestTemplateException(ApiError apiError, HttpServletRequest request) {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 }

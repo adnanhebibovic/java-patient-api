@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Arrays;
-import javax.transaction.Transactional;
 
 import com.test.transferfhir.classes.Name;
 import com.test.transferfhir.classes.Patient;
@@ -38,7 +37,6 @@ class ServiceTests {
     private PatientService patientService;
 
     @Test
-    @Transactional
     void givenMockito_whenGetIsCalled_thenReturnMockObject()
     {
         Name name = new Name();

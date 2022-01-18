@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
-public class ApiError {
+public class ApiError extends RuntimeException {
 
-    private HttpStatus status;
-    private String message;
-    private List<String> errors;
+    private final HttpStatus status;
+    private final String message;
+    private final List<String> errors;
 
     public ApiError(HttpStatus status, String message, List<String> errors) {
         super();
@@ -19,7 +19,7 @@ public class ApiError {
     }
 
     public ApiError(HttpStatus status, String message, String error) {
-        super();
+        super(error);
         this.status = status;
         this.message = message;
         errors = Arrays.asList(error);
@@ -29,6 +29,7 @@ public class ApiError {
         return status;
     }
 
+    @Override
     public String getMessage() {
         return message;
     }
